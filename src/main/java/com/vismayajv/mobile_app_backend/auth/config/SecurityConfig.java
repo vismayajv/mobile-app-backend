@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import jakarta.servlet.DispatcherType;
 import com.vismayajv.mobile_app_backend.auth.security.JwtAuthenticationFilter;
 
 @Configuration
@@ -36,6 +36,7 @@ public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Excepti
             )
 
             .authorizeHttpRequests(auth -> auth
+                 .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                     .requestMatchers(
                             "/api/auth/register",
                             "/api/auth/login",

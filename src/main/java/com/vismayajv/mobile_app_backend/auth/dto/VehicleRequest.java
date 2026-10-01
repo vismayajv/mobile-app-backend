@@ -1,11 +1,26 @@
 package com.vismayajv.mobile_app_backend.auth.dto;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class VehicleRequest {
 
+    @NotBlank (message = "vehicleNumber is required")
     private String vehicleNumber;
+
+    @NotBlank (message = "make is required")
     private String make;
+
+    @NotBlank (message = "model is required")
     private String model;
+
+    @NotNull (message = "year is required")
+    @Max (2100)
+    @Min (1990)
     private Integer year;
+
+    @NotBlank (message = "fuelType is required")
     private String fuelType;
 
     public VehicleRequest() {

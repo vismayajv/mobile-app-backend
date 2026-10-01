@@ -4,6 +4,7 @@ import com.vismayajv.mobile_app_backend.auth.entity.Vehicle;
 import com.vismayajv.mobile_app_backend.auth.dto.VehicleRequest;
 import com.vismayajv.mobile_app_backend.auth.dto.VehicleResponse;
 import com.vismayajv.mobile_app_backend.auth.service.VehicleService;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class VehicleController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public VehicleResponse  createVehicle(@RequestBody VehicleRequest request) {
+    public VehicleResponse  createVehicle( @Valid @RequestBody VehicleRequest request) {
         return vehicleService.createVehicle(request);
     }
 
@@ -37,6 +38,7 @@ public VehicleResponse getMyVehicle(@PathVariable Long id) {
 }
 @PutMapping("/{id}")
 public VehicleResponse  updateVehicle(
+        @Valid 
         @PathVariable Long id,
         @RequestBody VehicleRequest request) {
 

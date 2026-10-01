@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import com.vismayajv.mobile_app_backend.exception.ResourceNotFoundException;
 
 
 @Service 
@@ -65,7 +66,7 @@ return toResponse(savedVehicle);
     user loggedInUser = (user) authentication.getPrincipal();
 
     Vehicle vehicle = vehicleRepository.findByIdAndUser(id, loggedInUser)
-            .orElseThrow(() -> new RuntimeException("Vehicle not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found"));
 
     return toResponse(vehicle);
 }
@@ -78,7 +79,7 @@ public VehicleResponse  updateVehicle(Long id, VehicleRequest request) {
     user loggedInUser = (user) authentication.getPrincipal();
 
     Vehicle vehicle = vehicleRepository.findByIdAndUser(id, loggedInUser)
-            .orElseThrow(() -> new RuntimeException("Vehicle not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found"));
 
     vehicle.setVehicleNumber(request.getVehicleNumber());
     vehicle.setMake(request.getMake());
@@ -99,7 +100,7 @@ public void deleteVehicle(Long id) {
     user loggedInUser = (user) authentication.getPrincipal();
 
     Vehicle vehicle = vehicleRepository.findByIdAndUser(id, loggedInUser)
-            .orElseThrow(() -> new RuntimeException("Vehicle not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found"));
 
     vehicleRepository.delete(vehicle);
 }
